@@ -1,21 +1,26 @@
 #include "Entity.h"
+#include <iostream>
 
-Entity::Entity(std::string name, int hp, int atk, int def, int level) : name(name), hp(hp), atk(atk), def(def), level(level) {};
+Entity::Entity(const std::string& name, int hp, int attack, int defense)
+    : name(name), hp(hp), maxHp(hp), attack(attack), defense(defense) {}
 
-void Entity::showStatus() {
-    std::cout << "Name: " << name << std::endl;
-    std::cout << "HP: " << hp << std::endl;
-    std::cout << "ATK: " << atk << std::endl;
-    std::cout << "DEF: " << def << std::endl;
-    std::cout << "Level: " << level << std::endl;
+void Entity::takeDamage(int damage)
+{
+    int actual = damage - defense;
+    if (actual < 1)
+        actual = 1; // 최소 1 데미지
+    hp -= actual;
+    if (hp < 0)
+        hp = 0;
 }
 
-void Entity::attack(Entity& target) {
-    int damage = atk - target.def;
-    if (damage < 0) damage = 0;
-    target.hp -= damage;
+bool Entity::isAlive()
+{
+    return hp > 0;
 }
 
-bool Entity::isDead() {
-    return hp <= 0;
-}
+std::string Entity::getName(){ return name; }
+int Entity::getHp(){ return hp; }
+int Entity::getMaxHp(){ return maxHp; }
+int Entity::getAttack(){ return attack; }
+int Entity::getDefense(){ return defense; }

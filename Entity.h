@@ -1,22 +1,29 @@
-#ifndef ENTITY_H
-#define ENTITY_H
-
-#include <iostream>
+// 추상 기반 클래스 (HP·ATK·DEF, 순수 가상 함수)
+#pragma once // #ifndef, #define와 달리 한줄로 같은 기능을 간단하게 구현 가능, GCC·Clang·MSVC 전부 지원
 #include <string>
 
 class Entity{
 protected:
     std::string name; // 이름
-    int hp, atk, def, level; // 체력 공격력 방어력 레벨
+    int hp; // 체력
+    int maxHp; // 최대체력
+    int attack; // 공격력
+    int defense; // 방어력
 public:
-    Entity(std::string name, int hp, int atk, int def, int level);
+    Entity(const std::string& name, int hp, int attack, int defense);
+    virtual ~Entity() = default; // default는 구현부에서 생략 가능
 
-    virtual void showStatus(); // 상태 출력
-    virtual void attack(Entity& target); // 공격, 매개변수로 타겟 지정
+    // 순수 가상 함수, 파생 클래스에서 구현
+    virtual void attackTarget(Entity& target) = 0;
+    virtual void printStatus() = 0;
 
-    bool isDead(); // 사망 여부 반환
+    // 공통 기능
+    void takeDamage(int damage);
+    bool isAlive();
 
-    virtual void getType() = 0; // 순수 가상 함수
+    std::string getName();
+    int getHp();
+    int getMaxHp();
+    int getAttack();
+    int getDefense();
 };
-
-#endif
