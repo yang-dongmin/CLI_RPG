@@ -12,7 +12,7 @@ void Character::attackTarget(Entity& target) {
 }
 
 void Character::printStatus() {
-    std::cout << "[" << getJobName() << "] " << name
+    std::cout << "\n[" << getJobName() << "] " << name
               << " | HP: " << hp << "/" << maxHp
               << " | ATK: " << attack
               << " | DEF: " << defense
@@ -37,6 +37,13 @@ void Character::levelUp() {
 int Character::getLevel() { return level; }
 int Character::getExp() { return exp; }
 Inventory& Character::getInventory() { return inventory; }
+
+void Character::setHp(int h)      { hp = (h > maxHp) ? maxHp : h; }
+void Character::setAttack(int a)  { attack = a; }
+void Character::setDefense(int d) { defense = d; }
+void Character::setLevel(int lv)    { level = lv; }
+void Character::setExp(int e)       { exp = e; }
+void Character::setMaxHp(int m)     { maxHp = m; }
 
 // ===== Warrior =====
 Warrior::Warrior(const std::string& name)

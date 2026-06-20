@@ -14,12 +14,14 @@ void Entity::takeDamage(int damage)
         hp = 0;
 }
 
+// 생사여부
 bool Entity::isAlive()
 {
     return hp > 0;
 }
 
-std::string Entity::getName(){ return name; }
+// 이름, 체력, 최대체력, 공격력, 방어력 반환
+std::string Entity::getName(){ return name; } 
 int Entity::getHp(){ return hp; }
 int Entity::getMaxHp(){ return maxHp; }
 int Entity::getAttack(){ return attack; }

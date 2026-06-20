@@ -23,7 +23,6 @@ public:
     void addDrop(const Item& item);
 };
 
-// ===== 몬스터 파생 클래스 =====
 
 class Slime : public Monster {
 public:

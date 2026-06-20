@@ -12,7 +12,7 @@ void Monster::attackTarget(Entity& target) {
 }
 
 void Monster::printStatus() {
-    std::cout << "[" << getMonsterType() << "] " << name
+    std::cout << "\n[" << getMonsterType() << "] " << name
               << " | HP: " << hp << "/" << maxHp
               << " | ATK: " << attack
               << " | DEF: " << defense << "\n";

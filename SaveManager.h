@@ -12,5 +12,5 @@ public:
     ~SaveManager();
 
     void save(Character& character);
-    Character* load();  // 실패 시 nullptr 반환
+    Character* load();
 };

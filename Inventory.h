@@ -13,10 +13,10 @@ public:
     Inventory(int maxSize = 10);
     ~Inventory();
 
-    bool addItem(const Item& item);     // 아이템 추가 (꽉 차면 false)
-    bool useItem(int index, int& hp, int& attack, int& defense);  // 아이템 사용
-    void removeItem(int index);         // 아이템 제거
-    void printInventory();        // 인벤토리 출력
+    bool addItem(const Item& item); // 아이템 추가 (꽉 차면 false)
+    bool useItem(int index, int& hp, int& attack, int& defense); // 아이템 사용
+    void removeItem(int index); // 아이템 제거
+    void printInventory(); // 인벤토리 출력
 
     int getSize();
     bool isFull();

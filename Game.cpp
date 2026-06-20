@@ -13,9 +13,9 @@ Game::~Game() {
 }
 
 void Game::run() {
-    std::cout << "=========================\n";
-    std::cout << "   텍스트 RPG에 오신걸 환영합니다!\n";
-    std::cout << "=========================\n";
+    std::cout << "================================\n";
+    std::cout << "   [텍스트 RPG 전투 시뮬레이터]\n";
+    std::cout << "================================\n";
     mainMenu();
 }
 
@@ -61,10 +61,10 @@ Character* Game::createCharacter() {
     std::cin >> name;
 
     std::cout << "\n직업을 선택하세요\n";
-    std::cout << "1. 전사  (HP 150 / ATK 20 / DEF 15)\n";
-    std::cout << "2. 마법사 (HP  90 / ATK 30 / DEF  5)\n";
-    std::cout << "3. 도적  (HP 100 / ATK 25 / DEF  8)\n";
-    std::cout << "4. 팔라딘 (HP 120 / ATK 18 / DEF 20)\n";
+    std::cout << "1 : 전사  (HP 150 / ATK 20 / DEF 15)\n";
+    std::cout << "2 : 마법사 (HP  90 / ATK 30 / DEF  5)\n";
+    std::cout << "3 : 도적  (HP 100 / ATK 25 / DEF  8)\n";
+    std::cout << "4 : 팔라딘 (HP 120 / ATK 18 / DEF 20)\n";
     std::cout << "선택: ";
 
     int choice;
@@ -72,13 +72,26 @@ Character* Game::createCharacter() {
 
     Character* character = nullptr;
     switch (choice) {
-        case 1: character = new Warrior(name);  break;
-        case 2: character = new Mage(name);     break;
-        case 3: character = new Rogue(name);    break;
-        case 4: character = new Paladin(name);  break;
-        default:
+        case 1:{
+            character = new Warrior(name);  
+            break;
+        }
+        case 2:{
+            character = new Mage(name);
+            break;
+        }
+        case 3:{
+            character = new Rogue(name);
+            break;
+        }
+        case 4:{
+            character = new Paladin(name);
+            break;
+        }
+        default:{
             std::cout << "잘못된 입력, 전사로 시작합니다.\n";
             character = new Warrior(name);
+        }
     }
 
     std::cout << "\n" << name << " (" << character->getJobName() << ") 생성 완료!\n";
@@ -86,7 +99,7 @@ Character* Game::createCharacter() {
 }
 
 Monster* Game::createMonster() {
-    // STL + 람다로 랜덤 몬스터 생성
+    // 랜덤 몬스터 생성
     std::vector<Monster*> pool = {
         new Slime(),
         new Goblin(),
@@ -97,8 +110,13 @@ Monster* Game::createMonster() {
     // 플레이어 레벨에 맞는 몬스터만 필터링
     int level = player->getLevel();
     std::vector<Monster*> filtered;
-    std::copy_if(pool.begin(), pool.end(), std::back_inserter(filtered),
-        [level](Monster* m) { return m->getExpReward() <= level * 60; });
+    for (int i = 0; i < pool.size(); i++)
+    {
+        if (pool[i]->getExpReward() <= level * 60)
+        {
+            filtered.push_back(pool[i]);
+        }
+    }
 
     if (filtered.empty()) filtered = pool;
 
@@ -110,7 +128,7 @@ Monster* Game::createMonster() {
     selected->addDrop(Item("공격력 물약", ITEM_ATTACK,  5));
     selected->addDrop(Item("방어력 물약", ITEM_DEFENSE, 5));
 
-    // pool에서 selected 제외하고 나머지 delete
+    // selected 제외하고 나머지 delete (메모리 누수 방지)
     for (Monster* m : pool) {
         if (m != selected) delete m;
     }
@@ -132,7 +150,7 @@ void Game::gameLoop() {
 
         switch (choice) {
             case 1: goAdventure(); break;
-            case 2: showStatus();  break;
+            case 2: printStatus();  break;
             case 3:
                 try {
                     saveManager.save(*player);
@@ -149,7 +167,7 @@ void Game::gameLoop() {
     std::cout << "\n=== 게임 오버 ===\n";
 }
 
-void Game::showStatus() {
+void Game::printStatus() {
     player->printStatus();
     player->getInventory().printInventory();
 }
@@ -161,12 +179,13 @@ void Game::goAdventure() {
     int result = battle.startBattle();
 
     if (result == 0) {  // 패배
-        std::cout << "체력을 회복하고 다시 도전하세요!\n";
+        std::cout << "다시 도전하세요!\n";
     } else if (result == 1) {  // 승리
         std::cout << "전투 승리!\n";
     } else {  // 도망
-        std::cout << "안전하게 도망쳤습니다!\n";
+        std::cout << "도망쳤습니다!\n";
     }
+    saveManager.save(*player); // 전투 끝날 때마다 저장
 
     delete monster;
 }

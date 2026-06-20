@@ -1,4 +1,4 @@
-// 플레이어 클래스 + Warrior·Mage·Rogue·Paladin
+// 플레이어 클래스 + 전사 마법사 도적 팔라딘
 #pragma once
 #include "Entity.h"
 #include "Inventory.h"
@@ -24,11 +24,17 @@ public:
     int getLevel();
     int getExp();
     Inventory& getInventory();
+
+    void setHp(int hp);
+    void setAttack(int atk);
+    void setDefense(int def);
+    void setLevel(int lv);
+    void setExp(int exp);
+    void setMaxHp(int maxHp);
 };
 
-// ===== 직업 파생 클래스 =====
 
-class Warrior : public Character {
+class Warrior : public Character { // 전사
 public:
     Warrior(const std::string& name);
     void attackTarget(Entity& target) override;  // 강타 (데미지 1.5배)
@@ -36,7 +42,7 @@ public:
     std::string getJobName() override { return "전사"; }
 };
 
-class Mage : public Character {
+class Mage : public Character { // 마법사
 public:
     Mage(const std::string& name);
     void attackTarget(Entity& target) override;  // 마법 (방어력 무시)
@@ -44,7 +50,7 @@ public:
     std::string getJobName() override { return "마법사"; }
 };
 
-class Rogue : public Character {
+class Rogue : public Character { // 도적
 public:
     Rogue(const std::string& name);
     void attackTarget(Entity& target) override;  // 급소 (확률적 2배)
@@ -52,7 +58,7 @@ public:
     std::string getJobName() override { return "도적"; }
 };
 
-class Paladin : public Character {
+class Paladin : public Character { // 팔라딘
 public:
     Paladin(const std::string& name);
     void attackTarget(Entity& target) override;  // 방어+공격 균형

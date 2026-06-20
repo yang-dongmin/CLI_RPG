@@ -8,13 +8,13 @@ BattleSystem::BattleSystem(Character* player, Monster* monster)
 BattleSystem::~BattleSystem() {}
 
 void BattleSystem::printBattleStatus(){
-    std::cout << "\n=============================\n";
+    std::cout << "===========[Turn " << turn++ << "]===========\n";
     player->printStatus();
     monster->printStatus();
-    std::cout << "=============================\n";
+    std::cout << "\n==============================\n";
 }
 
-void BattleSystem::playerTurn() {
+bool BattleSystem::playerTurn() {
     std::cout << "\n행동을 선택하세요\n";
     std::cout << "1. 공격\n";
     std::cout << "2. 아이템 사용\n";
@@ -44,12 +44,17 @@ void BattleSystem::playerTurn() {
             int atk    = player->getAttack();
             int def    = player->getDefense();
             player->getInventory().useItem(idx - 1, hp, atk, def);
+
+            player->setHp(hp);
+            player->setAttack(atk);
+            player->setDefense(def);
             break;
         }
         case 3:
             std::cout << player->getName() << " 이/가 도망쳤습니다!\n";
-            break;
-    }
+            return true; // 도망
+        }
+        return false; // 도망 아님
 }
 
 void BattleSystem::monsterTurn() {
@@ -59,14 +64,14 @@ void BattleSystem::monsterTurn() {
               << player->getName() << " 에게 데미지!\n";
 }
 
-int BattleSystem::startBattle() {
+int BattleSystem::startBattle() { // 0: 패배, 1: 승리, 2: 도망
     std::cout << "\n== 전투 시작! " << monster->getName() << " 등장! ==\n";
 
     while (player->isAlive() && monster->isAlive()) {
         printBattleStatus();
 
         try {
-            playerTurn();
+            if (playerTurn()) return 2;
         } catch (const std::invalid_argument& e) {
             std::cout << e.what() << " 다시 입력하세요.\n";
             continue;
@@ -95,7 +100,7 @@ int BattleSystem::startBattle() {
             std::cout << item.getName() << " 을/를 획득했습니다!\n";
             player->getInventory().addItem(item);
         }
-        return 1;
+        return 1; // 승리
     }
-    return 2;  // 도망
+    return 2; // 도망
 }

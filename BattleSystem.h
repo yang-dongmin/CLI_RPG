@@ -8,13 +8,15 @@ private:
     Character* player;
     Monster* monster;
 
-    void playerTurn();
+    bool playerTurn();
     void monsterTurn();
     void printBattleStatus();
+
+    int turn = 1;
 
 public:
     BattleSystem(Character* player, Monster* monster);
     ~BattleSystem();
 
-    int startBattle();  // 0: 패배, 1: 승리, 2: 도망
+    int startBattle();
 };

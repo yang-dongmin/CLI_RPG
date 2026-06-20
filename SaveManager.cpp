@@ -56,6 +56,13 @@ Character* SaveManager::load() {
     else if (jobName == "팔라딘") character = new Paladin(name);
     else throw std::runtime_error("알 수 없는 직업입니다.");
 
+    character->setMaxHp(maxHp);
+    character->setHp(hp);
+    character->setAttack(attack);
+    character->setDefense(defense);
+    character->setLevel(level);
+    character->setExp(exp);
+
     // 인벤토리 로드
     int invSize;
     file >> invSize;

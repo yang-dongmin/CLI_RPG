@@ -13,3 +13,12 @@ add_executable(rpg
     SaveManager.cpp
     Game.cpp
 )
+add_executable(test
+    test.cpp
+    Entity.cpp
+    Character.cpp
+    Monster.cpp
+    Item.cpp
+    Inventory.cpp
+    SaveManager.cpp
+)

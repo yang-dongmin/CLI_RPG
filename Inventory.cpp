@@ -1,6 +1,7 @@
 #include "Inventory.h"
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 Inventory::Inventory(int maxSize) : maxSize(maxSize) {}
 
@@ -18,7 +19,7 @@ bool Inventory::useItem(int index, int& hp, int& attack, int& defense) {
 
     Item item = items[index];
 
-    switch (item.getType()) {
+    switch (item.getType()) { // item switch문에서 비교
         case ITEM_HEAL:
             hp += item.getValue();
             std::cout << item.getName() << " 사용! HP +" << item.getValue() << "\n";
@@ -48,6 +49,9 @@ void Inventory::printInventory(){
         std::cout << "인벤토리가 비어있습니다.\n";
         return;
     }
+    std::sort(items.begin(), items.end(), [](Item& a, Item& b) {
+        return a.getValue() > b.getValue();
+    });
     std::cout << "=== 인벤토리 [" << items.size() << "/" << maxSize << "] ===\n";
     for (int i = 0; i < (int)items.size(); i++) {
         std::cout << i + 1 << ". ";

@@ -17,7 +17,7 @@ private:
     void loadGame();
 
     void gameLoop();
-    void showStatus();
+    void printStatus();
     void goAdventure();
 
     Character* createCharacter();
