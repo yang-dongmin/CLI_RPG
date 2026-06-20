@@ -178,14 +178,16 @@ void Game::goAdventure() {
 
     int result = battle.startBattle();
 
-    if (result == 0) {  // 패배
+    if (result == 0) {  // 패배 = 저장 X, 재도전 가능
         std::cout << "다시 도전하세요!\n";
     } else if (result == 1) {  // 승리
         std::cout << "전투 승리!\n";
+        saveManager.save(*player); // 승리 시 저장
+
     } else {  // 도망
         std::cout << "도망쳤습니다!\n";
-    }
-    saveManager.save(*player); // 전투 끝날 때마다 저장
+        saveManager.save(*player); // 도망 시 저장
 
+    }
     delete monster;
 }

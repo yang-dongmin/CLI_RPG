@@ -1,7 +1,6 @@
 #include "Character.h"
 #include <iostream>
 
-// ===== Character =====
 Character::Character(const std::string& name, int hp, int attack, int defense)
     : Entity(name, hp, attack, defense), level(1), exp(0) {}
 
@@ -45,8 +44,7 @@ void Character::setLevel(int lv)    { level = lv; }
 void Character::setExp(int e)       { exp = e; }
 void Character::setMaxHp(int m)     { maxHp = m; }
 
-// ===== Warrior =====
-Warrior::Warrior(const std::string& name)
+Warrior::Warrior(const std::string& name) // 전사
     : Character(name, 150, 20, 15) {}
 
 void Warrior::attackTarget(Entity& target) {
@@ -57,21 +55,18 @@ void Warrior::printStatus() {
     Character::printStatus();
 }
 
-// ===== Mage =====
-Mage::Mage(const std::string& name)
+Mage::Mage(const std::string& name) // 마법사
     : Character(name, 90, 30, 5) {}
 
 void Mage::attackTarget(Entity& target) {
-    target.takeDamage(attack + 10);  // 방어력 무시 (takeDamage 내 defense 차감 우회)
-    // TODO: Monster에 마법 전용 takeMagicDamage 추가 고려
+    target.takeDamage(attack + 10);  // 마법 공격 (방어력 무시)
 }
 
 void Mage::printStatus() {
     Character::printStatus();
 }
 
-// ===== Rogue =====
-Rogue::Rogue(const std::string& name)
+Rogue::Rogue(const std::string& name) // 도적
     : Character(name, 100, 25, 8) {}
 
 void Rogue::attackTarget(Entity& target) {
@@ -83,8 +78,7 @@ void Rogue::printStatus() {
     Character::printStatus();
 }
 
-// ===== Paladin =====
-Paladin::Paladin(const std::string& name)
+Paladin::Paladin(const std::string& name) // 팔라딘
     : Character(name, 120, 18, 20) {}
 
 void Paladin::attackTarget(Entity& target) {

@@ -49,9 +49,8 @@ void Inventory::printInventory(){
         std::cout << "인벤토리가 비어있습니다.\n";
         return;
     }
-    std::sort(items.begin(), items.end(), [](Item& a, Item& b) {
-        return a.getValue() > b.getValue();
-    });
+    std::sort(items.begin(), items.end(), [](Item &a, Item &b)
+              { return a.getType() < b.getType(); });
     std::cout << "=== 인벤토리 [" << items.size() << "/" << maxSize << "] ===\n";
     for (int i = 0; i < (int)items.size(); i++) {
         std::cout << i + 1 << ". ";
