@@ -1,4 +1,0 @@
-C:/Users/User/Desktop/Study/CPP/CLI_RPG/build/CMakeFiles/rpg.dir
-C:/Users/User/Desktop/Study/CPP/CLI_RPG/build/CMakeFiles/test.dir
-C:/Users/User/Desktop/Study/CPP/CLI_RPG/build/CMakeFiles/edit_cache.dir
-C:/Users/User/Desktop/Study/CPP/CLI_RPG/build/CMakeFiles/rebuild_cache.dir
