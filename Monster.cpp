@@ -1,7 +1,6 @@
 #include "Monster.h"
 #include <iostream>
 
-// ===== Monster =====
 Monster::Monster(const std::string& name, int hp, int attack, int defense, int expReward)
     : Entity(name, hp, attack, defense), expReward(expReward) {}
 
@@ -12,7 +11,7 @@ void Monster::attackTarget(Entity& target) {
 }
 
 void Monster::printStatus() {
-    std::cout << "\n[" << getMonsterType() << "] " << name
+    std::cout << "\n[" << getMonsterType() << "]"
               << " | HP: " << hp << "/" << maxHp
               << " | ATK: " << attack
               << " | DEF: " << defense << "\n";
@@ -33,7 +32,6 @@ std::vector<Item> Monster::drop() {
     return dropped;
 }
 
-// ===== Slime =====
 Slime::Slime()
     : Monster("슬라임", 40, 8, 2, 20) {}
 
@@ -43,7 +41,6 @@ void Slime::attackTarget(Entity& target) {
 
 void Slime::printStatus() { Monster::printStatus(); }
 
-// ===== Goblin =====
 Goblin::Goblin()
     : Monster("고블린", 60, 12, 5, 40) {}
 
@@ -54,7 +51,6 @@ void Goblin::attackTarget(Entity& target) {
 
 void Goblin::printStatus() { Monster::printStatus(); }
 
-// ===== Orc =====
 Orc::Orc()
     : Monster("오크", 100, 18, 10, 70) {}
 
@@ -64,7 +60,6 @@ void Orc::attackTarget(Entity& target) {
 
 void Orc::printStatus() { Monster::printStatus(); }
 
-// ===== Dragon =====
 Dragon::Dragon()
     : Monster("드래곤", 200, 30, 20, 150) {}
 

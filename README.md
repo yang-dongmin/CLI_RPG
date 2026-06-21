@@ -59,3 +59,37 @@ test.exe
 - 저장 파일: save.txt (실행 파일과 같은 디렉토리에 생성)
 - 저장 내용: 캐릭터 이름·직업·스탯·레벨·경험치·인벤토리
 - 메인 메뉴에서 2. 불러오기 로 이어하기 가능
+
+## 클래스 계층 구조
+``` bash
+Entity (추상 클래스)
+├── Character
+│   ├── Warrior
+│   ├── Mage
+│   ├── Rogue
+│   └── Paladin
+└── Monster
+    ├── Slime
+    ├── Goblin
+    ├── Orc
+    └── Dragon
+
+Game
+├── BattleSystem
+├── SaveManager
+└── Character*
+        └── Inventory
+                └── vector<Item>
+```
+
+## C++ 표준 예외 클래스 계층
+``` bash
+std::exception
+├── std::logic_error        ← 프로그래머 실수로 인한 오류
+│   ├── invalid_argument    ← 잘못된 인자
+│   ├── out_of_range        ← 범위 초과
+│   └── length_error        ← 길이 제한 초과
+└── std::runtime_error      ← 실행 중 발생하는 오류
+    ├── overflow_error      ← 산술 오버플로우
+    └── underflow_error     ← 산술 언더플로우
+```

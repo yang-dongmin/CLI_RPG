@@ -1,4 +1,4 @@
-// 추상 기반 클래스 (HP·ATK·DEF, 순수 가상 함수)
+// 추상 클래스 (HP·ATK·DEF, 순수 가상 함수)
 #pragma once // #ifndef, #define와 달리 한줄로 같은 기능을 간단하게 구현 가능, GCC·Clang·MSVC 전부 지원
 #include <string>
 
