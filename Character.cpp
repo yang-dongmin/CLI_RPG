@@ -48,7 +48,7 @@ Warrior::Warrior(const std::string& name) // 전사
     : Character(name, 150, 20, 15) {}
 
 void Warrior::attackTarget(Entity& target) {
-    target.takeDamage(attack * 1.5);  // 강타
+    target.takeDamage(static_cast<int>(attack * 1.5));  // 강타
 }
 
 void Warrior::printStatus() {

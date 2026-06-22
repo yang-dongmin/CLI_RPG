@@ -55,7 +55,7 @@ Orc::Orc()
     : Monster("오크", 100, 18, 10, 70) {}
 
 void Orc::attackTarget(Entity& target) {
-    target.takeDamage(attack * 1.5);  // 강타
+    target.takeDamage(static_cast<int>(attack * 1.5));  // 강타
 }
 
 void Orc::printStatus() { Monster::printStatus(); }

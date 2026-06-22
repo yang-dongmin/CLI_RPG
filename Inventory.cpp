@@ -59,7 +59,7 @@ void Inventory::printInventory(){
     }
 }
 
-int Inventory::getSize(){ return items.size(); }
+int Inventory::getSize() { return static_cast<int>(items.size()); }
 bool Inventory::isFull(){ return (int)items.size() >= maxSize; }
 bool Inventory::isEmpty(){ return items.empty(); }
 Item Inventory::getItem(int index){ return items[index]; }

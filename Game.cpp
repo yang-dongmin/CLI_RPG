@@ -5,7 +5,7 @@
 #include <algorithm>
 
 Game::Game() : player(nullptr), saveManager("save.txt") {
-    srand(time(0));  // 랜덤 시드
+    srand(static_cast<unsigned int>(time(0)));  // 랜덤 시드
 }
 
 Game::~Game() {
